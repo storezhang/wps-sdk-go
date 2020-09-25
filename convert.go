@@ -1,5 +1,9 @@
 package wps
 
+import (
+	`encoding/json`
+)
+
 type (
 	// ConvertReq 文件转换请求
 	ConvertReq struct {
@@ -22,3 +26,15 @@ type (
 		} `json:"data"`
 	}
 )
+
+func (cr ConvertReq) String() string {
+	jsonBytes, _ := json.MarshalIndent(cr, "", "    ")
+
+	return string(jsonBytes)
+}
+
+func (fer ConvertRsp) String() string {
+	jsonBytes, _ := json.MarshalIndent(fer, "", "    ")
+
+	return string(jsonBytes)
+}

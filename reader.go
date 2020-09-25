@@ -1,5 +1,9 @@
 package wps
 
+import (
+	`encoding/json`
+)
+
 // Reader 文档预览
 type Reader struct {
 	// 文件预览Id
@@ -34,4 +38,10 @@ type Reader struct {
 	// 第5位：默认1（显示），是否显示插入和删除
 	// 第6位：默认1（显示），是否显示格式修订
 	WpsPreview string `json:"wpsPreview" url:"wpsPreview"`
+}
+
+func (r Reader) String() string {
+	jsonBytes, _ := json.MarshalIndent(r, "", "    ")
+
+	return string(jsonBytes)
 }

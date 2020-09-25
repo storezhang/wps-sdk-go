@@ -8,8 +8,11 @@ import (
 	log `github.com/sirupsen/logrus`
 )
 
-func (w *Wps) Exist(id string, fileType FileType) (rsp FileExistRsp, err error) {
-	var wpsRsp *resty.Response
+func (w *Wps) Exist(id string, fileType FileType) (exist bool, err error) {
+	var (
+		wpsRsp *resty.Response
+		rsp    FileExistRsp
+	)
 
 	wpsRsp, err = NewResty().
 		SetBody(FileExistReq{Id: id, Type: fileType}).
@@ -22,7 +25,7 @@ func (w *Wps) Exist(id string, fileType FileType) (rsp FileExistRsp, err error) 
 			"id":    id,
 			"type":  fileType,
 			"error": err,
-		}).Error("上传文件出错")
+		}).Error("判断文件是否存在出错")
 
 		return
 	}
@@ -33,8 +36,15 @@ func (w *Wps) Exist(id string, fileType FileType) (rsp FileExistRsp, err error) 
 			"id":         id,
 			"type":       fileType,
 			"statusCode": wpsRsp.StatusCode(),
-		}).Error("上传文件失败")
+		}).Error("判断文件是否存在失败")
+
+		return
 	}
+
+	if StatusOk != rsp.Code {
+		return
+	}
+	exist = rsp.Data.ExistsFile
 
 	return
 }

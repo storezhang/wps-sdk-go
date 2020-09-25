@@ -3,24 +3,33 @@ package wps
 import (
 	`fmt`
 	`net/http`
+	`net/url`
 
 	`github.com/go-resty/resty/v2`
+	`github.com/google/go-querystring/query`
 	log `github.com/sirupsen/logrus`
 )
 
-func (w *Wps) UploadNetworkFile(url string) (rsp UploadFileRsp, err error) {
-	var wpsRsp *resty.Response
+func (w *Wps) UploadNetworkFile(fileUrl string) (rsp UploadFileRsp, err error) {
+	var (
+		params url.Values
+		wpsRsp *resty.Response
+	)
 
+	req := UploadNetworkFileReq{Url: fileUrl}
+	if params, err = query.Values(req); nil != err {
+		return
+	}
 	wpsRsp, err = NewResty().
-		SetBody(UploadNetworkFileReq{Url: url}).
+		SetFormDataFromValues(params).
 		SetResult(&rsp).
 		Post(fmt.Sprintf("%s/api/httpFile", w.convertUrl()))
 
 	if nil != err {
 		log.WithFields(log.Fields{
-			"wps":   w,
-			"url":   url,
-			"error": err,
+			"wps":     w,
+			"fileUrl": fileUrl,
+			"error":   err,
 		}).Error("上传文件出错")
 
 		return
@@ -29,7 +38,7 @@ func (w *Wps) UploadNetworkFile(url string) (rsp UploadFileRsp, err error) {
 	if http.StatusOK != wpsRsp.StatusCode() {
 		log.WithFields(log.Fields{
 			"wps":        w,
-			"url":        url,
+			"fileUrl":    fileUrl,
 			"statusCode": wpsRsp.StatusCode(),
 		}).Error("上传文件失败")
 	}

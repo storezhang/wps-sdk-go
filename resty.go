@@ -8,8 +8,5 @@ import (
 
 // NewResty Resty客户端
 func NewResty() *resty.Request {
-	return resty.New().
-		SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true}).
-		R().
-		ForceContentType(DefaultWpsContentType)
+	return resty.New().SetTLSClientConfig(&tls.Config{InsecureSkipVerify: true}).R()
 }

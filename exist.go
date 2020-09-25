@@ -1,12 +1,16 @@
 package wps
 
+import (
+	`encoding/json`
+)
+
 const (
 	// 上传文件
 	FileTypeUpload FileType = "UPLOAD"
 	// 下载文件
 	FileTypeDownload FileType = "DOWNLOAD"
 	// 预览文件
-	FileTypePREVIEW FileType = "PREVIEW"
+	FileTypePreview FileType = "PREVIEW"
 )
 
 type (
@@ -30,3 +34,15 @@ type (
 		} `json:"data"`
 	}
 )
+
+func (fer FileExistReq) String() string {
+	jsonBytes, _ := json.MarshalIndent(fer, "", "    ")
+
+	return string(jsonBytes)
+}
+
+func (fer FileExistRsp) String() string {
+	jsonBytes, _ := json.MarshalIndent(fer, "", "    ")
+
+	return string(jsonBytes)
+}

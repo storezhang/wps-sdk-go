@@ -1,18 +1,16 @@
 package wps
 
 import (
+	`encoding/json`
 	`fmt`
 )
 
 const (
-	// 默认的Content Type
-	DefaultWpsContentType string = "application/x-www-form-urlencoded"
-
 	// 状态码
 	// 成功
-	WpsStatusOk string = "200"
+	StatusOk string = "200"
 	// 参数错误
-	WpsStatusParamsError string = "400"
+	StatusParamsError string = "400"
 )
 
 // Wps 金山文档
@@ -27,6 +25,12 @@ type Wps struct {
 	PreviewPrefix string `default:"web" json:"previewPrefix"`
 	// 文档转换前缀
 	ConvertPrefix string `default:"web-preview" json:"convertPrefix"`
+}
+
+func (w Wps) String() string {
+	jsonBytes, _ := json.MarshalIndent(w, "", "    ")
+
+	return string(jsonBytes)
 }
 
 func (w *Wps) previewUrl() string {

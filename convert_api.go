@@ -22,7 +22,7 @@ func (w *Wps) Convert(id string, targetFileFormat string) (rsp ConvertRsp, err e
 			"id":               id,
 			"targetFileFormat": targetFileFormat,
 			"error":            err,
-		}).Error("上传文件出错")
+		}).Error("转换文件出错")
 
 		return
 	}
@@ -33,7 +33,7 @@ func (w *Wps) Convert(id string, targetFileFormat string) (rsp ConvertRsp, err e
 			"id":               id,
 			"targetFileFormat": targetFileFormat,
 			"statusCode":       wpsRsp.StatusCode(),
-		}).Error("上传文件失败")
+		}).Error("转换文件失败")
 	}
 
 	return
