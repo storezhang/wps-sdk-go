@@ -4,6 +4,17 @@ import (
 	`fmt`
 )
 
+const (
+	// 默认的Content Type
+	DefaultWpsContentType string = "application/x-www-form-urlencoded"
+
+	// 状态码
+	// 成功
+	WpsStatusOk string = "200"
+	// 参数错误
+	WpsStatusParamsError string = "400"
+)
+
 // Wps 金山文档
 type Wps struct {
 	// 服务器地址
