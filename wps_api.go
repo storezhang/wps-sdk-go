@@ -8,6 +8,7 @@ import (
 	`github.com/google/go-querystring/query`
 )
 
+// PreviewUrl 获得预览地址
 func (w *Wps) PreviewUrl(reader Reader) (previewUrl string, err error) {
 	var values url.Values
 

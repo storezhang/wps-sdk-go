@@ -4,6 +4,7 @@ import (
 	log `github.com/sirupsen/logrus`
 )
 
+// ConvertByNetworkFile 转换网络文件
 func (w *Wps) ConvertByNetworkFile(
 	url string,
 	targetFileFormat string,

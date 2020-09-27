@@ -8,6 +8,7 @@ import (
 	log `github.com/sirupsen/logrus`
 )
 
+// Exist 判断文件是否存在
 func (w *Wps) Exist(id string, fileType FileType) (exist bool, err error) {
 	var (
 		wpsRsp *resty.Response

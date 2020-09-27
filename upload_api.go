@@ -10,6 +10,8 @@ import (
 	log `github.com/sirupsen/logrus`
 )
 
+// UploadNetworkFile 上传网络文件
+// 可以是Http和Https地址，且只支持这两种地址
 func (w *Wps) UploadNetworkFile(fileUrl string) (rsp UploadFileRsp, err error) {
 	var (
 		params url.Values

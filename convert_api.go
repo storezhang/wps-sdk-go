@@ -8,6 +8,7 @@ import (
 	log `github.com/sirupsen/logrus`
 )
 
+// Convert 文档转换
 func (w *Wps) Convert(id string, targetFileFormat string) (rsp ConvertRsp, err error) {
 	var wpsRsp *resty.Response
 
