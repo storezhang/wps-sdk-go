@@ -11,47 +11,47 @@ type (
 )
 
 const (
-	W SupportType = "w"
-	S SupportType = "s"
-	P SupportType = "p"
+	Writer       SupportType = "w"
+	Spreadsheets SupportType = "s"
+	Presentation SupportType = "p"
 	// F SupportType = "f"
 )
 
 var wpsSupportExt = map[string]SupportType{
 	// 文字文件
-	"doc":  W,
-	"dot":  W,
-	"wps":  W,
-	"wpt":  W,
-	"docx": W,
-	"dotx": W,
-	"docm": W,
-	"dotm": W,
+	"doc":  Writer,
+	"dot":  Writer,
+	"wps":  Writer,
+	"wpt":  Writer,
+	"docx": Writer,
+	"dotx": Writer,
+	"docm": Writer,
+	"dotm": Writer,
 
 	// 表格文件
-	"xls":  S,
-	"xlt":  S,
-	"et":   S,
-	"xlsx": S,
-	"xltx": S,
-	"xlsm": S,
-	"xltm": S,
+	"xls":  Spreadsheets,
+	"xlt":  Spreadsheets,
+	"et":   Spreadsheets,
+	"xlsx": Spreadsheets,
+	"xltx": Spreadsheets,
+	"xlsm": Spreadsheets,
+	"xltm": Spreadsheets,
 
 	// 演示文件
-	"ppt":  P,
-	"pptx": P,
-	"pptm": P,
-	"ppsx": P,
-	"ppsm": P,
-	"pps":  P,
-	"potx": P,
-	"potm": P,
-	"dpt":  P,
-	"dps":  P,
+	"ppt":  Presentation,
+	"pptx": Presentation,
+	"pptm": Presentation,
+	"ppsx": Presentation,
+	"ppsm": Presentation,
+	"pps":  Presentation,
+	"potx": Presentation,
+	"potm": Presentation,
+	"dpt":  Presentation,
+	"dps":  Presentation,
 }
 
-func CheckSupport(fileName string) (ok bool, st SupportType) {
-	ext := filepath.Ext(fileName)
+func CheckSupport(filename string) (ok bool, st SupportType) {
+	ext := filepath.Ext(filename)
 	ext = strings.ToLower(ext[1:])
 	st, ok = wpsSupportExt[ext]
 
