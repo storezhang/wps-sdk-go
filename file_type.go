@@ -8,52 +8,96 @@ import (
 type (
 	// SupportType 文件预览支持格式
 	SupportType string
+	// FormatType 扩展类型
+	FormatType string
 )
 
 const (
-	Writer       SupportType = "w"
-	Spreadsheets SupportType = "s"
-	Presentation SupportType = "p"
-	// F SupportType = "f"
+	SupportTypeWriter       SupportType = "w"
+	SupportTypeSpreadsheets SupportType = "s"
+	SupportTypePresentation SupportType = "p"
+	SupportTypePdf          SupportType = "f"
 )
 
-var wpsSupportExt = map[string]SupportType{
+const (
+	FormatTypeNone FormatType = ""
 	// 文字文件
-	"doc":  Writer,
-	"dot":  Writer,
-	"wps":  Writer,
-	"wpt":  Writer,
-	"docx": Writer,
-	"dotx": Writer,
-	"docm": Writer,
-	"dotm": Writer,
+	FormatTypeDoc  FormatType = "doc"
+	FormatTypeDot  FormatType = "dot"
+	FormatTypeWps  FormatType = "wps"
+	FormatTypeWpt  FormatType = "wpt"
+	FormatTypeDocx FormatType = "docx"
+	FormatTypeDotx FormatType = "dotx"
+	FormatTypeDocm FormatType = "docm"
+	FormatTypeDotm FormatType = "dotm"
 
 	// 表格文件
-	"xls":  Spreadsheets,
-	"xlt":  Spreadsheets,
-	"et":   Spreadsheets,
-	"xlsx": Spreadsheets,
-	"xltx": Spreadsheets,
-	"xlsm": Spreadsheets,
-	"xltm": Spreadsheets,
+	FormatTypeXls  FormatType = "xls"
+	FormatTypeXlt  FormatType = "xlt"
+	FormatTypeEt   FormatType = "et"
+	FormatTypeXlsx FormatType = "xlsx"
+	FormatTypeXltx FormatType = "xltx"
+	FormatTypeXlsm FormatType = "xlsm"
+	FormatTypeXltm FormatType = "xltm"
 
 	// 演示文件
-	"ppt":  Presentation,
-	"pptx": Presentation,
-	"pptm": Presentation,
-	"ppsx": Presentation,
-	"ppsm": Presentation,
-	"pps":  Presentation,
-	"potx": Presentation,
-	"potm": Presentation,
-	"dpt":  Presentation,
-	"dps":  Presentation,
+	FormatTypePpt  FormatType = "ppt"
+	FormatTypePptx FormatType = "pptx"
+	FormatTypePptm FormatType = "pptm"
+	FormatTypePpsx FormatType = "ppsx"
+	FormatTypePpsm FormatType = "ppsm"
+	FormatTypePps  FormatType = "pps"
+	FormatTypePotx FormatType = "potx"
+	FormatTypePotm FormatType = "potm"
+	FormatTypeDpt  FormatType = "dpt"
+	FormatTypeDps  FormatType = "dps"
+
+	// Pdf文件
+	FormatTypePdf FormatType = "pdf"
+	FormatTypeOfd FormatType = "ofd"
+)
+
+var wpsSupportExt = map[FormatType]SupportType{
+	// 文字文件
+	FormatTypeDoc:  SupportTypeWriter,
+	FormatTypeDot:  SupportTypeWriter,
+	FormatTypeWps:  SupportTypeWriter,
+	FormatTypeWpt:  SupportTypeWriter,
+	FormatTypeDocx: SupportTypeWriter,
+	FormatTypeDotx: SupportTypeWriter,
+	FormatTypeDocm: SupportTypeWriter,
+	FormatTypeDotm: SupportTypeWriter,
+
+	// 表格文件
+	FormatTypeXls:  SupportTypeSpreadsheets,
+	FormatTypeXlt:  SupportTypeSpreadsheets,
+	FormatTypeEt:   SupportTypeSpreadsheets,
+	FormatTypeXlsx: SupportTypeSpreadsheets,
+	FormatTypeXltx: SupportTypeSpreadsheets,
+	FormatTypeXlsm: SupportTypeSpreadsheets,
+	FormatTypeXltm: SupportTypeSpreadsheets,
+
+	// 演示文件
+	FormatTypePpt:  SupportTypePresentation,
+	FormatTypePptx: SupportTypePresentation,
+	FormatTypePptm: SupportTypePresentation,
+	FormatTypePpsx: SupportTypePresentation,
+	FormatTypePpsm: SupportTypePresentation,
+	FormatTypePps:  SupportTypePresentation,
+	FormatTypePotx: SupportTypePresentation,
+	FormatTypePotm: SupportTypePresentation,
+	FormatTypeDpt:  SupportTypePresentation,
+	FormatTypeDps:  SupportTypePresentation,
+
+	// Pdf文件
+	FormatTypePdf: SupportTypePdf,
+	FormatTypeOfd: SupportTypePdf,
 }
 
 func CheckSupport(filename string) (ok bool, st SupportType) {
 	ext := filepath.Ext(filename)
 	ext = strings.ToLower(ext[1:])
-	st, ok = wpsSupportExt[ext]
+	st, ok = wpsSupportExt[FormatType(ext)]
 
 	return
 }

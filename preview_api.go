@@ -7,7 +7,7 @@ import (
 // ConvertByNetworkFile 转换网络文件
 func (w *Wps) ConvertByNetworkFile(
 	url string,
-	targetFileFormat string,
+	formatType FormatType,
 ) (previewId string, downloadId string, fileId string, err error) {
 	// 上传文件
 	var uploadRsp UploadFileRsp
@@ -27,7 +27,7 @@ func (w *Wps) ConvertByNetworkFile(
 
 	// 拿到预览结果
 	var convertRsp ConvertRsp
-	if convertRsp, err = w.Convert(fileId, targetFileFormat); nil != err {
+	if convertRsp, err = w.Convert(fileId, formatType); nil != err {
 		return
 	}
 	if StatusOk != convertRsp.Code {

@@ -10,7 +10,7 @@ type (
 		// 上传后的文档Id
 		Id string `json:"id"`
 		// 目标文件格式，如果为空表示默认转换为默认的预览格式
-		TargetFileFormat string `json:"targetFileFormat"`
+		TargetFileFormat FormatType `json:"targetFileFormat"`
 	}
 
 	// ConvertRsp 文档转换响应
