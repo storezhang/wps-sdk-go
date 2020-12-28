@@ -4,6 +4,7 @@ import (
 	`fmt`
 	`net/http`
 
+	`github.com/go-resty/resty/v2`
 	log `github.com/sirupsen/logrus`
 )
 
