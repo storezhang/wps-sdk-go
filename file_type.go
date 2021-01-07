@@ -1,8 +1,8 @@
 package wps
 
 import (
-	`path/filepath`
-	`strings`
+	"path/filepath"
+	"strings"
 )
 
 type (
@@ -95,7 +95,13 @@ var wpsSupportExt = map[FormatType]SupportType{
 }
 
 func CheckSupport(filename string) (ok bool, st SupportType) {
+	if "" == filename {
+		return
+	}
 	ext := filepath.Ext(filename)
+	if "" == ext {
+		return
+	}
 	ext = strings.ToLower(ext[1:])
 	st, ok = wpsSupportExt[FormatType(ext)]
 
