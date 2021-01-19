@@ -7,7 +7,7 @@ import (
 
 const (
 	// 状态码
-	// 成功
+	// StatusOk 成功
 	StatusOk string = "200"
 	// 参数错误
 	// StatusParamsError string = "400"
@@ -15,8 +15,10 @@ const (
 
 // Wps 金山文档
 type Wps struct {
-	// 服务器地址
-	Url string `json:"url"`
+	// ApiUrl 服务器地址
+	ApiUrl string `json:"apiUrl"`
+	// PreviewUrl 浏览地址
+	ViewUrl string `json:"viewUrl"`
 	// 文档预览前缀
 	PreviewPrefix string `default:"web" json:"previewPrefix"`
 	// 内部文档预览前缀
@@ -32,13 +34,13 @@ func (w Wps) String() string {
 }
 
 func (w *Wps) previewUrl() string {
-	return fmt.Sprintf("%s/%s", w.Url, w.PreviewPrefix)
+	return fmt.Sprintf("%s/%s", w.ViewUrl, w.PreviewPrefix)
 }
 
 func (w *Wps) innerPreviewUrl() string {
-	return fmt.Sprintf("%s/%s", w.Url, w.InnerPreviewPrefix)
+	return fmt.Sprintf("%s/%s", w.ViewUrl, w.InnerPreviewPrefix)
 }
 
 func (w *Wps) convertUrl() string {
-	return fmt.Sprintf("%s/%s", w.Url, w.ConvertPrefix)
+	return fmt.Sprintf("%s/%s", w.ApiUrl, w.ConvertPrefix)
 }
