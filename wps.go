@@ -22,7 +22,7 @@ type Wps struct {
 	// 文档预览前缀
 	PreviewPrefix string `default:"web" json:"previewPrefix"`
 	// 内部文档预览前缀
-	InnerPreviewPrefix string `default:"office" json:"innerPreviewPrefix"`
+	OfficePrefix string `default:"office" json:"officePrefix"`
 	// 文档转换前缀
 	ConvertPrefix string `default:"web-preview" json:"convertPrefix"`
 }
@@ -37,8 +37,8 @@ func (w *Wps) previewUrl() string {
 	return fmt.Sprintf("%s/%s", w.ViewUrl, w.PreviewPrefix)
 }
 
-func (w *Wps) innerPreviewUrl() string {
-	return fmt.Sprintf("%s/%s", w.ViewUrl, w.InnerPreviewPrefix)
+func (w *Wps) officeUrl() string {
+	return fmt.Sprintf("%s/%s", w.ViewUrl, w.OfficePrefix)
 }
 
 func (w *Wps) convertUrl() string {

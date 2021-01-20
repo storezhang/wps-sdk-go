@@ -24,8 +24,8 @@ func (w *Wps) PreviewUrl(reader Reader) (previewUrl string, err error) {
 	return
 }
 
-// InnerPreviewUrl 获得预览地址，去掉外层iframe后的地址
-func (w *Wps) InnerPreviewUrl(filename string, reader Reader) (previewUrl string, err error) {
+// OfficeUrl 获得预览地址，去掉外层iframe后的地址
+func (w *Wps) OfficeUrl(filename string, reader Reader) (previewUrl string, err error) {
 	var values url.Values
 
 	if values, err = query.Values(reader); nil != err {
@@ -34,7 +34,7 @@ func (w *Wps) InnerPreviewUrl(filename string, reader Reader) (previewUrl string
 	params := values.Encode()
 
 	if ok, st := CheckSupport(filename); ok {
-		previewUrl = fmt.Sprintf("%s/%s/%s?%s", w.innerPreviewUrl(), st, reader.File, params)
+		previewUrl = fmt.Sprintf("%s/%s/%s?%s", w.officeUrl(), st, reader.File, params)
 	}
 
 	return

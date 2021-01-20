@@ -19,10 +19,12 @@ type (
 
 		// 数据
 		Data struct {
-			// 下载Id，如果不存在此字段表示文档不可下载
+			// Download 下载Id，如果不存在此字段表示文档不可下载
 			Download string `json:"download"`
-			// 预览Id，如果不存在此字段表示该文档不可被预览
+			// Preview 预览Id，如果不存在此字段表示该文档不可被预览
 			Preview string `json:"preview"`
+			// OfficeUrl Office预览Uri，仅在后台管理开启配置且为WebOffice预览时才存在
+			OfficeUrl string `json:"officeUrl"`
 		} `json:"data"`
 	}
 )
