@@ -29,6 +29,8 @@ func (w *Wps) Convert(id string, formatType FormatType) (rsp ConvertRsp, err err
 	}
 
 	if http.StatusOK != wpsRsp.StatusCode() {
+		err = newFileConvertError(wpsRsp.StatusCode())
+
 		log.WithFields(log.Fields{
 			"wps":        w,
 			"id":         id,

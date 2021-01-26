@@ -32,6 +32,8 @@ func (w *Wps) Exist(id string, fileType FileType) (exist bool, err error) {
 	}
 
 	if http.StatusOK != wpsRsp.StatusCode() {
+		err = newFileExistError(wpsRsp.StatusCode())
+
 		log.WithFields(log.Fields{
 			"wps":        w,
 			"id":         id,
@@ -43,6 +45,8 @@ func (w *Wps) Exist(id string, fileType FileType) (exist bool, err error) {
 	}
 
 	if StatusOk != rsp.Code {
+		err = newFileExistError(rsp.ErrorCode())
+
 		return
 	}
 	exist = rsp.Data.ExistsFile

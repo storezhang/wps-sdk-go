@@ -38,6 +38,8 @@ func (w *Wps) UploadNetworkFile(fileUrl string) (rsp UploadFileRsp, err error) {
 	}
 
 	if http.StatusOK != wpsRsp.StatusCode() {
+		err = newFileConvertError(wpsRsp.StatusCode())
+
 		log.WithFields(log.Fields{
 			"wps":        w,
 			"fileUrl":    fileUrl,

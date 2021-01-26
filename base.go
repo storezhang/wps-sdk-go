@@ -1,5 +1,9 @@
 package wps
 
+import (
+	`strconv`
+)
+
 type (
 	// BaseRsp 响应基类
 	BaseRsp struct {
@@ -11,3 +15,13 @@ type (
 		ServerTime string `json:"servertime"`
 	}
 )
+
+func (br *BaseRsp) ErrorCode() (code int) {
+	var err error
+
+	if code, err = strconv.Atoi(br.Code); nil != err {
+		code = 1000
+	}
+
+	return
+}

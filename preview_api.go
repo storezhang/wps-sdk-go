@@ -15,6 +15,8 @@ func (w *Wps) ConvertByNetworkFile(
 		return
 	}
 	if StatusOk != uploadRsp.Code {
+		err = newFileUploadError(uploadRsp.ErrorCode())
+
 		log.WithFields(log.Fields{
 			"wps":   w,
 			"rsp":   uploadRsp,
@@ -31,6 +33,8 @@ func (w *Wps) ConvertByNetworkFile(
 		return
 	}
 	if StatusOk != convertRsp.Code {
+		err = newFileConvertError(convertRsp.ErrorCode())
+
 		log.WithFields(log.Fields{
 			"wps":   w,
 			"rsp":   convertRsp,
