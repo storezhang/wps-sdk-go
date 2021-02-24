@@ -22,14 +22,12 @@ func (w *Wps) UploadNetworkFile(fileUrl string) (rsp UploadFileRsp, err error) {
 	if params, err = query.Values(req); nil != err {
 		return
 	}
-	wpsRsp, err = NewResty().
+	if wpsRsp, err = NewResty().
 		SetFormDataFromValues(params).
 		SetResult(&rsp).
-		Post(fmt.Sprintf("%s/api/httpFile", w.convertUrl()))
-
-	if nil != err {
+		Post(fmt.Sprintf("%s/api/httpFile", w.convertUrl())); nil != err {
 		log.WithFields(log.Fields{
-			"wps":     w,
+			"url":     w.ApiUrl,
 			"fileUrl": fileUrl,
 			"error":   err,
 		}).Error("上传文件出错")
@@ -41,7 +39,7 @@ func (w *Wps) UploadNetworkFile(fileUrl string) (rsp UploadFileRsp, err error) {
 		err = newFileConvertError(wpsRsp.StatusCode())
 
 		log.WithFields(log.Fields{
-			"wps":        w,
+			"url":        w.ApiUrl,
 			"fileUrl":    fileUrl,
 			"statusCode": wpsRsp.StatusCode(),
 		}).Error("上传文件失败")
