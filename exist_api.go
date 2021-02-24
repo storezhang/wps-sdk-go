@@ -2,6 +2,7 @@ package wps
 
 import (
 	`fmt`
+	`net/http`
 
 	`github.com/go-resty/resty/v2`
 	log `github.com/sirupsen/logrus`
@@ -35,7 +36,11 @@ func (w *Wps) Exist(id string, fileType FileType) (exist bool, err error) {
 		"response": wpsRsp.String(),
 	}).Debug("判断文件是否存在返回结果")
 
-	exist = rsp.Data.ExistsFile
+	if http.StatusNotFound == wpsRsp.StatusCode() {
+		exist = false
+	} else {
+		exist = rsp.Data.ExistsFile
+	}
 
 	return
 }
