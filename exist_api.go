@@ -19,7 +19,7 @@ func (w *Wps) Exist(id string, fileType FileType) (exist bool, err error) {
 		SetResult(&rsp).
 		Post(fmt.Sprintf("%s/api/verify/exists/file", w.convertUrl())); nil != err {
 		log.WithFields(log.Fields{
-			"wps":   w,
+			"url":   w.ApiUrl,
 			"id":    id,
 			"type":  fileType,
 			"error": err,
